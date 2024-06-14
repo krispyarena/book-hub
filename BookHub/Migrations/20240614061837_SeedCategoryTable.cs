@@ -17,11 +17,11 @@ namespace BookHub.Migrations
                 columns: new[] { "Id", "DisplayOrder", "Name" },
                 values: new object[,]
                 {
-                    { 1, 1, "Action" },
+                    { 1, 5, "Action" },
                     { 2, 2, "Sci-Fi" },
-                    { 3, 3, "Histpry" },
+                    { 3, 3, "History" },
                     { 4, 4, "Drama" },
-                    { 5, 5, "Story" }
+                    { 5, 1, "Story" }
                 });
         }
 
