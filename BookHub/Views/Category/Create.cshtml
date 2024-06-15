@@ -9,10 +9,12 @@
 		<div class="mb-3 p-1">
 			<label class="p-0" asp-for="Name"></label>
 			<input type = "text" asp-for="Name" class="form-control" />
+			<span asp-validation-for="Name" class="text-danger"></span>
 		</div>
 		<div class="mb-3 p-1">
 			<label class="p-0" asp-for="DisplayOrder"></label>
 			<input type="number" asp-for="DisplayOrder" class="form-control" />
+			<span asp-validation-for="DisplayOrder" class="text-danger"></span>
 		</div>
 		<div class="row p-1">
 			<div><button type="submit" class="btn btn-info">Create</button>

@@ -23,5 +23,17 @@ namespace BookHub.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        public IActionResult Create(Category category)
+        {
+            if (ModelState.IsValid)
+            {
+                _db.Categories.Add(category);
+                _db.SaveChanges();
+				return RedirectToAction("Index");
+			}
+            return View();
+		}
     }
 }
