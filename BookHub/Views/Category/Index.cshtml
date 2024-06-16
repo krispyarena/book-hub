@@ -2,6 +2,10 @@
 	ViewData["Title"] = "Category List";
 }
 @model List<Category> 
+@if (TempData["success"] != null)
+{
+	<span class="text-success">@TempData["success"]</span>
+}
 
 <div class="container">
 	<div class="row pt-4 pb-3">
