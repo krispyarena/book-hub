@@ -1,6 +1,7 @@
 ﻿using BookHub.Data;
 using BookHub.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace BookHub.Controllers
 {
@@ -55,10 +56,6 @@ namespace BookHub.Controllers
             }
             return View(categoryFromDb);
         }
-        public IActionResult Delete()
-        {
-            return View();
-        }
 
         [HttpPost]
         public IActionResult Edit(Category obj)
@@ -72,5 +69,36 @@ namespace BookHub.Controllers
             }
             return View();
         }
-    }
+
+		public IActionResult Delete(int? id)
+		{
+			if (id == null || id == 0)
+			{
+				return NotFound();
+			}
+			Category? categoryFromDb = _db.Categories.Find(id);
+			//Category? categoryFromDb1 = _db.Categories.FirstOrDefault(u=>u.Id == id);    
+			//Category? categoryFromDb2 = _db.Categories.Where(u=>u.Id == id).FirstOrDefault();    
+			if (categoryFromDb == null)
+			{
+				return NotFound();
+			}
+			return View(categoryFromDb);
+		}
+
+		[HttpPost, ActionName("Delete")]
+
+		public IActionResult DeletePost(int? id)
+		{
+            Category? obj = _db.Categories.Find(id);
+            if (obj == null)
+            {
+                return NotFound();
+            }
+            _db.Categories.Remove(obj);
+			_db.SaveChanges();
+
+			return RedirectToAction("Index");
+		}
+	}
 }
