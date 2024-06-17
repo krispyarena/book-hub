@@ -61,6 +61,10 @@ namespace BookHub.Controllers
         [HttpPost]
         public IActionResult Edit(Category obj)
         {
+            if (obj.Name == obj.DisplayOrder.ToString())
+            {
+                ModelState.AddModelError("DisplayOrder", "Name and Display Order cannot be same");
+            }
             if (ModelState.IsValid)
             {
                 _db.Categories.Update(obj);
