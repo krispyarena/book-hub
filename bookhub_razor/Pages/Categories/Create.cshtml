@@ -1,0 +1,33 @@
+﻿@page
+@model bookhub_razor.Pages.Categories.CreateModel
+
+<form method="post">
+	<div class="border mt-4 p-3">
+		<div class="row pb-2">
+			<h2 class="text-body-tertiary">Create Category</h2>
+			<hr />
+		</div>
+		<div asp-validation-summary="All" class="text-danger"></div>
+		<div class="mb-3 p-1">
+			<label class="p-0" asp-for="Category.Name"></label>
+			<input type = "text" asp-for="Category.Name" class="form-control" />
+			<span asp-validation-for="Category.Name" class="text-danger"></span>
+		</div>
+		<div class="mb-3 p-1">
+			<label class="p-0" asp-for="Category.DisplayOrder"></label>
+			<input type="number" asp-for="Category.DisplayOrder" class="form-control" />
+			<span asp-validation-for="Category.DisplayOrder" class="text-danger"></span>
+		</div>
+		<div class="row p-1">
+			<div><button type="submit" class="btn btn-info">Create</button>
+				<a asp-page="/Categories/Index" class="btn btn-danger">Back</a>
+			</div>
+		</div>
+	</div>
+</form>
+
+@section Scripts{
+	@{
+		<partial name="_ValidationScriptsPartial" />
+	}
+}
