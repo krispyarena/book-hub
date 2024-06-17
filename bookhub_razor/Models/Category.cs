@@ -13,6 +13,6 @@ namespace bookhub_razor.Models
 
         [DisplayName("DisplayOrder")]
         [Range(1,100, ErrorMessage = "The feild Display Order must be between 1-100")]
-        public string DisplayOrder { get; set; }
+        public int DisplayOrder { get; set; }
     }
 }
