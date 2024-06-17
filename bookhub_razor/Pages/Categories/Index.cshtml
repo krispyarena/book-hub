@@ -1,0 +1,47 @@
+﻿@page
+@model bookhub_razor.Pages.Categories.IndexModel
+
+<div class="container">
+	<div class="row pt-4 pb-3">
+		<div class="col-6">
+			<h2 class="text-body-tertiary">
+				Category List
+			</h2>
+		</div>
+
+		<div class="col-6 text-end">
+			<a asp-page="Categories/Create" class="btn btn-info">
+				<i class="bi bi-plus-circle"></i>&nbsp; Add Category
+			</a>
+		</div>
+	</div>
+<table class="table table=bordered table-striped">
+	<thead>
+	<tr>
+		<th>Category Name</th>
+		<th>Display Order</th>
+		<th>Action</th>
+	</tr>
+	</thead>
+
+	<tbody>
+		@foreach (var obj in Model.CategoryList.OrderBy(u => u.DisplayOrder))
+		{
+			<tr>
+				<td>@obj.Name</td>
+				<td>@obj.DisplayOrder</td>
+				<td>
+					<div>
+							<a asp-page="Category/edit" asp-route-id="@obj.Id" class="btn btn-primary">
+							<i class="bi bi-pencil-square" ></i> &nbsp; Edit
+				</a> &nbsp;
+							<a asp-page="Category/delete" asp-route-id="@obj.Id" class="btn btn-danger">
+								<i class="bi bi-trash3-fill"></i>&nbsp; Delete
+							</a>
+				</div>
+			</td>
+			</tr>
+		}
+	</tbody>
+</table>
+</div>

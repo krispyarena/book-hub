@@ -5,7 +5,7 @@ VisualStudioVersion = 17.10.34928.147
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookHub", "BookHub\BookHub.csproj", "{8D2B5887-796C-4EFC-86ED-70681643864E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bookhub_razor", "bookhub_razor\bookhub_razor.csproj", "{DE3C56AA-B87C-4037-9437-CE10696ED45C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "bookhub_razor", "bookhub_razor\bookhub_razor.csproj", "{DE3C56AA-B87C-4037-9437-CE10696ED45C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
