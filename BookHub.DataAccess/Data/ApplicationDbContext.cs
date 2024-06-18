@@ -1,7 +1,7 @@
 ﻿using BookHub.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace BookHub.Data
+namespace BookHub.DataAccess.Data
 {
     public class ApplicationDbContext : DbContext
     {

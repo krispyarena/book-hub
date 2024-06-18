@@ -1,7 +1,6 @@
-﻿using BookHub.Data;
+﻿using BookHub.DataAccess.Data;
 using BookHub.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace BookHub.Controllers
 {
