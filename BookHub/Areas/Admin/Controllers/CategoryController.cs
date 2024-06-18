@@ -3,8 +3,9 @@ using BookHub.DataAccess.Repository.IRepository;
 using BookHub.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace BookHub.Controllers
+namespace BookHub.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class CategoryController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -48,7 +49,7 @@ namespace BookHub.Controllers
             {
                 return NotFound();
             }
-            Category? categoryFromDb = _unitOfWork.Category.Get(u=>u.Id==id);
+            Category? categoryFromDb = _unitOfWork.Category.Get(u => u.Id == id);
             //Category? categoryFromDb1 = _db.Categories.FirstOrDefault(u=>u.Id == id);    
             //Category? categoryFromDb2 = _db.Categories.Where(u=>u.Id == id).FirstOrDefault();    
             if (categoryFromDb == null)
@@ -70,44 +71,44 @@ namespace BookHub.Controllers
                 _unitOfWork.Category.Update(obj);
                 _unitOfWork.Save();
 
-				TempData["success"] = "Category Updated Successfully";
+                TempData["success"] = "Category Updated Successfully";
 
-				return RedirectToAction("Index");
+                return RedirectToAction("Index");
             }
             return View();
         }
 
-		public IActionResult Delete(int? id)
-		{
-			if (id == null || id == 0)
-			{
-				return NotFound();
-			}
-			Category? categoryFromDb = _unitOfWork.Category.Get(u=>u.Id==id);
-			//Category? categoryFromDb1 = _db.Categories.FirstOrDefault(u=>u.Id == id);    
-			//Category? categoryFromDb2 = _db.Categories.Where(u=>u.Id == id).FirstOrDefault();    
-			if (categoryFromDb == null)
-			{
-				return NotFound();
-			}
-			return View(categoryFromDb);
-		}
+        public IActionResult Delete(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+            Category? categoryFromDb = _unitOfWork.Category.Get(u => u.Id == id);
+            //Category? categoryFromDb1 = _db.Categories.FirstOrDefault(u=>u.Id == id);    
+            //Category? categoryFromDb2 = _db.Categories.Where(u=>u.Id == id).FirstOrDefault();    
+            if (categoryFromDb == null)
+            {
+                return NotFound();
+            }
+            return View(categoryFromDb);
+        }
 
-		[HttpPost, ActionName("Delete")]
+        [HttpPost, ActionName("Delete")]
 
-		public IActionResult DeletePost(int? id)
-		{
+        public IActionResult DeletePost(int? id)
+        {
             Category? obj = _unitOfWork.Category.Get(u => u.Id == id);
             if (obj == null)
             {
                 return NotFound();
             }
             _unitOfWork.Category.Remove(obj);
-			_unitOfWork.Save();
+            _unitOfWork.Save();
 
-			TempData["success"] = "Category Deleted Successfully";
+            TempData["success"] = "Category Deleted Successfully";
 
-			return RedirectToAction("Index");
-		}
-	}
+            return RedirectToAction("Index");
+        }
+    }
 }
