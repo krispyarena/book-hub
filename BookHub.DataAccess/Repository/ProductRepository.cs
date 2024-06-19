@@ -21,7 +21,7 @@ namespace BookHub.DataAccess.Repository
 
 		public void Update(Product obj)
 		{
-			_db.Categories.Update(obj);
+			_db.Products.Update(obj);
 		}
     }
 }

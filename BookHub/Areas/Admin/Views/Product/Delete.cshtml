@@ -1,0 +1,69 @@
+﻿@{
+	ViewData["Title"] = "Delete";
+}
+
+@model Product
+
+<form method="post">
+	<input asp-for="Id" hidden>
+	<div class="border mt-4 p-3">
+		<div class="row pb-2">
+			<h2 class="text-body-tertiary">Delete Product</h2>
+			<hr />
+		</div>
+		<div asp-validation-summary="All" class="text-danger"></div>
+		<div class="mb-3 p-1">
+			<label class="p-0" asp-for="Title"></label>
+			<input type="text" asp-for="Title" disabled class="form-control" />
+			<span asp-validation-for="Title" class="text-danger"></span>
+		</div>
+		<div class="mb-3 p-1">
+			<label class="p-0" asp-for="Description"></label>
+			<input type="text" asp-for="Description" disabled class="form-control" />
+			<span asp-validation-for="Description" class="text-danger"></span>
+		</div>
+		<div class="mb-3 p-1">
+			<label class="p-0" asp-for="ISBN"></label>
+			<input type="text" asp-for="ISBN" disabled class="form-control" />
+			<span asp-validation-for="ISBN" class="text-danger"></span>
+		</div>
+		<div class="mb-3 p-1">
+			<label class="p-0" asp-for="Author"></label>
+			<input type="text" asp-for="Author" disabled class="form-control" />
+			<span asp-validation-for="Author" class="text-danger"></span>
+		</div>
+		<div class="mb-3 p-1">
+			<label class="p-0" asp-for="ListPrice"></label>
+			<input type="text" asp-for="ListPrice" disabled class="form-control" />
+			<span asp-validation-for="ListPrice" class="text-danger"></span>
+		</div>
+
+		<div class="mb-3 p-1">
+			<label class="p-0" asp-for="Price"></label>
+			<input type="number" asp-for="Price" disabled class="form-control" />
+			<span asp-validation-for="Price" class="text-danger"></span>
+		</div>
+		<div class="mb-3 p-1">
+			<label class="p-0" asp-for="Price50"></label>
+			<input type="number" asp-for="Price50" disabled class="form-control" />
+			<span asp-validation-for="Price50" class="text-danger"></span>
+		</div>
+		<div class="mb-3 p-1">
+			<label class="p-0" asp-for="Price100"></label>
+			<input type="number" asp-for="Price100" disabled class="form-control" />
+			<span asp-validation-for="Price100" class="text-danger"></span>
+		</div>
+		<div class="row p-1">
+			<div>
+				<button type="submit" class="btn btn-info">Update</button>
+				<a asp-controller="Product" asp-action="Index" class="btn btn-danger">Back</a>
+			</div>
+		</div>
+		<div class="row p-1">
+			<div>
+				<button type="submit" class="btn btn-danger">Delete</button>
+				<a asp-controller="Product" asp-action="Index" class="btn btn-info">Back</a>
+			</div>
+		</div>
+	</div>
+</form>

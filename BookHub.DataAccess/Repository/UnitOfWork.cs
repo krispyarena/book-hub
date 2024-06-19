@@ -14,7 +14,7 @@ namespace BookHub.DataAccess.Repository
 		public ICategoryRepository Category { get; private set; }
 		public IProductRepository Product { get; private set; }
 
-        IProductRepository IUnitOfWork.Product => throw new NotImplementedException();
+        //IProductRepository IUnitOfWork.Product => throw new NotImplementedException();
 
         public UnitOfWork(ApplicationDbContext db)
 		{
