@@ -4,11 +4,11 @@
 
 @model Product
 
-<form method="post">
+<form method="post" style="margin-bottom: 20px;">
 	<input asp-for="Id" hidden>
 	<div class="border mt-4 p-3">
 		<div class="row pb-2">
-			<h2 class="text-body-tertiary">Edit Product</h2>
+			<h2 class="text-body-Secondary">Edit Product</h2>
 			<hr />
 		</div>
 		<div asp-validation-summary="All" class="text-danger"></div>
@@ -53,10 +53,10 @@
 			<input type="number" asp-for="Price100" class="form-control" />
 			<span asp-validation-for="Price100" class="text-danger"></span>
 		</div>
-		<div class="row p-1 mb-3">
+		<div class="row pt-2 mb-4">
 			<div>
-				<button type="submit" class="btn btn-info">Update</button>
-				<a asp-controller="Product" asp-action="Index" class="btn btn-danger">Back</a>
+				<button type="submit" class="btn btn-info mx-2">Update</button>
+				<a asp-controller="Product" asp-action="Index" class="mx-2 btn btn-danger">Back</a>
 			</div>
 		</div>
 	</div>
