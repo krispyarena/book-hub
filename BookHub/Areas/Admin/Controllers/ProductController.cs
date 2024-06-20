@@ -1,7 +1,9 @@
-﻿using BookHub.DataAccess.Data;
+﻿using System.Collections.Generic;
+using BookHub.DataAccess.Data;
 using BookHub.DataAccess.Repository.IRepository;
 using BookHub.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace BookHub.Areas.Admin.Controllers
 {
@@ -18,6 +20,12 @@ namespace BookHub.Areas.Admin.Controllers
         public IActionResult Index()
         {
             List<Product> objProductList = _unitOfWork.Product.GetAll().ToList();
+            IEnumerable<SelectListItem> CategoryList = _unitOfWork.Category
+                .GetAll().Select(u => new SelectListItem
+                {
+                    Text = u.Name,
+                    Value = u.Id.ToString()
+                });
             return View(objProductList);
         }
 
