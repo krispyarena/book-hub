@@ -40,7 +40,7 @@
 						<td>@obj.Author</td>
 						<td>@obj.ISBN</td>
 						<td>@obj.ListPrice</td>
-						<td></td>
+						<td>@obj.Category.Name</td>
 						<td>
 							<div>
 								<a asp-controller="Product" asp-action="Upsert" asp-route-id="@obj.Id" class="btn btn-primary">
