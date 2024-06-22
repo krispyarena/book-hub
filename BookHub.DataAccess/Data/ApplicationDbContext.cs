@@ -15,6 +15,7 @@ namespace BookHub.DataAccess.Data
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+        public DbSet<Company> Companies { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -26,6 +27,27 @@ namespace BookHub.DataAccess.Data
                 new Category { Id = 3, Name = "History", DisplayOrder = 3 },
                 new Category { Id = 4, Name = "Drama", DisplayOrder = 4 },
                 new Category { Id = 5, Name = "Story", DisplayOrder = 1 }
+                );
+
+            modelBuilder.Entity<Company>().HasData(
+                new Company { Id = 1, Name = "LeapFrog Technology", StreetAddress="Dillibazar",
+                    City="Munich",
+                    PostalCode="44600",
+                    PhoneNumber="5312653615",
+                    State="Bavaria"
+                },
+                new Company { Id = 2, Name = "Infinite Services", StreetAddress = "Hattisar",
+                    City="Kathmandu",
+                    PostalCode = "44600",
+                    PhoneNumber = "832687326",
+                    State = "Bagmati"
+                },
+                new Company { Id = 3, Name = "Softech Foundation", StreetAddress = "Baneshwor",
+                    City="Pokhara",
+                    PostalCode = "44600",
+                    PhoneNumber = "9988111",
+                    State = "Gandaki"
+                }
                 );
 
             modelBuilder.Entity<Product>().HasData(

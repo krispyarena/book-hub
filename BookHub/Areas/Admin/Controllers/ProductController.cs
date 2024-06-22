@@ -113,8 +113,8 @@ namespace BookHub.Areas.Admin.Controllers
 					Text = u.Name,
 					Value = u.Id.ToString()
 				});
+                return View(productVM);
             }
-            return View(productVM);
         }
 
         [HttpPost, ActionName("Delete")]

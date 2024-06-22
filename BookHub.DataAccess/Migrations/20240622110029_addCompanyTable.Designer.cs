@@ -4,6 +4,7 @@ using BookHub.DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookHub.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240622110029_addCompanyTable")]
+    partial class addCompanyTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -105,38 +108,6 @@ namespace BookHub.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Companies");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            City = "Munich",
-                            Name = "LeapFrog Technology",
-                            PhoneNumber = "5312653615",
-                            PostalCode = "44600",
-                            State = "Bavaria",
-                            StreetAddress = "Dillibazar"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            City = "Kathmandu",
-                            Name = "Infinite Services",
-                            PhoneNumber = "832687326",
-                            PostalCode = "44600",
-                            State = "Bagmati",
-                            StreetAddress = "Hattisar"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            City = "Pokhara",
-                            Name = "Softech Foundation",
-                            PhoneNumber = "9988111",
-                            PostalCode = "44600",
-                            State = "Gandaki",
-                            StreetAddress = "Baneshwor"
-                        });
                 });
 
             modelBuilder.Entity("BookHub.Models.Product", b =>
