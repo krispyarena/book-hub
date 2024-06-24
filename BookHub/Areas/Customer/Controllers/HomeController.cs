@@ -25,11 +25,6 @@ namespace BookHub.Areas.Customer.Controllers
             return View(productList);
         }
 
-        public IActionResult Summary()
-        {
-            return View();
-        }
-
         public IActionResult Details(int productId)
         {
             ShoppingCart shoppingCart = new()
