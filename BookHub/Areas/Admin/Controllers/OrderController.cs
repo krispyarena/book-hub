@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BookHub.Areas.Admin.Controllers
 {
+	[Area("Admin")]
 	public class OrderController : Controller
 	{
 		private readonly IUnitOfWork _unitOfWork;
