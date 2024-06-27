@@ -2,6 +2,7 @@ using System.Diagnostics;
 using System.Security.Claims;
 using BookHub.DataAccess.Repository.IRepository;
 using BookHub.Models;
+using BookHub.Utility;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -50,12 +51,16 @@ namespace BookHub.Areas.Customer.Controllers
             {
                 cartFromDb.Count += shoppingCart.Count;
                 _unitOfWork.ShoppingCart.Update(cartFromDb);
+                _unitOfWork.Save();
 
                 TempData["success"] = "Cart updated successfully";
             }
             else
             {
                 _unitOfWork.ShoppingCart.Add(shoppingCart);
+                _unitOfWork.Save();
+                HttpContext.Session.SetInt32(SD.SessionCart, _unitOfWork.ShoppingCart.GetAll(
+                u => u.ApplicationUserId == userId).Count());
 
                 TempData["success"] = "Added to Cart successfully";
             }
