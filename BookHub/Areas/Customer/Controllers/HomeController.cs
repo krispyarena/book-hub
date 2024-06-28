@@ -65,7 +65,7 @@ namespace BookHub.Areas.Customer.Controllers
                 TempData["success"] = "Added to Cart successfully";
             }
 
-            _unitOfWork.Save();
+            
 
             return RedirectToAction(nameof(Index));
         }
