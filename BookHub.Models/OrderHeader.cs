@@ -6,10 +6,12 @@ using System.Linq;
 using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace BookHub.Models
 {
+    [BindProperties]
     public class OrderHeader
     {
         public int Id { get; set; }
