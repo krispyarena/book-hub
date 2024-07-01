@@ -11,7 +11,6 @@ using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace BookHub.Models
 {
-    [BindProperties]
     public class OrderHeader
     {
         public int Id { get; set; }
