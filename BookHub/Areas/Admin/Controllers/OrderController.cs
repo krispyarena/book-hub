@@ -5,39 +5,41 @@ using BookHub.Models;
 using BookHub.Models.ViewModels;
 using BookHub.Utility;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authorization.Infrastructure;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookHub.Areas.Admin.Controllers
 {
+	[Authorize]
 	[Area("Admin")]
 	public class OrderController : Controller
 	{
 		private readonly IUnitOfWork _unitOfWork;
 		[BindProperty]
 		public OrderVM OrderVM { get; set; }
-        public OrderController(IUnitOfWork unitOfWork)
-        {
-            _unitOfWork = unitOfWork;
-        }
-        public IActionResult Index()
+		public OrderController(IUnitOfWork unitOfWork)
+		{
+			_unitOfWork = unitOfWork;
+		}
+		public IActionResult Index()
 		{
 			return View();
 		}
 
-        public IActionResult Details(int orderId)
-        {
-            OrderVM = new()
-            {
-                OrderHeader = _unitOfWork.OrderHeader.Get(u => u.Id == orderId, includeProperties: "ApplicationUser"),
-                OrderDetail = _unitOfWork.OrderDetail.GetAll(u => u.OrderHeaderId == orderId, includeProperties: "Product"),
-            };
+		public IActionResult Details(int orderId)
+		{
+			OrderVM = new()
+			{
+				OrderHeader = _unitOfWork.OrderHeader.Get(u => u.Id == orderId, includeProperties: "ApplicationUser"),
+				OrderDetail = _unitOfWork.OrderDetail.GetAll(u => u.OrderHeaderId == orderId, includeProperties: "Product"),
+			};
 
-            return View(OrderVM);
-        }
-        [HttpPost]
-        [Authorize(Roles = SD.Role_Admin + "," + SD.Role_Employee)]
-        public IActionResult UpdateOrderDetail(int orderId)
+			return View(OrderVM);
+		}
+		[HttpPost]
+		[Authorize(Roles = SD.Role_Admin + "," + SD.Role_Employee)]
+		public IActionResult UpdateOrderDetail(int orderId)
 		{
 			var orderHeaderFromDb = _unitOfWork.OrderHeader.Get(u => u.Id == OrderVM.OrderHeader.Id);
 
@@ -52,16 +54,26 @@ namespace BookHub.Areas.Admin.Controllers
 			{
 				orderHeaderFromDb.Carrier = OrderVM.OrderHeader.Carrier;
 			}
-            if (!String.IsNullOrEmpty(OrderVM.OrderHeader.TrackingNumber))
-            {
-                orderHeaderFromDb.TrackingNumber = OrderVM.OrderHeader.TrackingNumber;
-            }
+			if (!String.IsNullOrEmpty(OrderVM.OrderHeader.TrackingNumber))
+			{
+				orderHeaderFromDb.TrackingNumber = OrderVM.OrderHeader.TrackingNumber;
+			}
 
 			_unitOfWork.OrderHeader.Update(orderHeaderFromDb);
 			_unitOfWork.Save();
 			TempData["Success"] = "Order Details updated successfully";
 
-            return RedirectToAction(nameof(Details), new {orderId = orderHeaderFromDb.Id});
+			return RedirectToAction(nameof(Details), new { orderId = orderHeaderFromDb.Id });
+		}
+		[HttpPost]
+		[Authorize(Roles = SD.Role_Admin + "," + SD.Role_Employee)]
+		public IActionResult StartProcessing()
+		{
+			_unitOfWork.OrderHeader.UpdateStatus(OrderVM.OrderHeader.Id, SD.StatusInProcess);
+			_unitOfWork.Save();
+			TempData["Success"] = "Order processing started";
+
+			return RedirectToAction(nameof(Details), new { orderId = OrderVM.OrderHeader.Id});
 		}
 
 		#region API CALLS
