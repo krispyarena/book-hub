@@ -76,6 +76,28 @@ namespace BookHub.Areas.Admin.Controllers
 			return RedirectToAction(nameof(Details), new { orderId = OrderVM.OrderHeader.Id});
 		}
 
+		[HttpPost]
+		[Authorize(Roles = SD.Role_Admin + "," + SD.Role_Employee)]
+		public IActionResult ShipOrder()
+		{
+			var orderHeader = _unitOfWork.OrderHeader.Get(u=>u.Id == OrderVM.OrderHeader.Id);
+			orderHeader.TrackingNumber = OrderVM.OrderHeader.TrackingNumber;
+			orderHeader.OrderStatus = SD.StatusShipped;
+			orderHeader.Carrier = OrderVM.OrderHeader.Carrier;
+			orderHeader.ShippingDate = DateTime.Now;
+
+			if(orderHeader.PaymentStatus == SD.PaymentStatusDelayedPayment)
+			{
+				orderHeader.PaymentDueDate = DateOnly.FromDateTime(DateTime.Now.AddDays(30));
+			}
+
+			_unitOfWork.OrderHeader.Update(orderHeader);
+			_unitOfWork.Save();
+			TempData["Success"] = "Order Shipping started";
+
+			return RedirectToAction(nameof(Details), new { orderId = OrderVM.OrderHeader.Id });
+		}
+
 		#region API CALLS
 		[HttpGet]
 		public IActionResult GetAll(string status)
