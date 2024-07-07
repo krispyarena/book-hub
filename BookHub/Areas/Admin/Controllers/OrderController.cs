@@ -123,7 +123,6 @@ namespace BookHub.Areas.Admin.Controllers
 				_unitOfWork.OrderHeader.UpdateStatus(orderHeader.Id, SD.StatusCancelled, SD.StatusCancelled);
 			}
 
-			_unitOfWork.OrderHeader.Update(orderHeader);
 			_unitOfWork.Save();
 			TempData["Success"] = "Order Cancelled Successfully";
 
