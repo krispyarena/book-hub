@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authorization.Infrastructure;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Stripe;
+using Stripe.Checkout;
 
 namespace BookHub.Areas.Admin.Controllers
 {
@@ -127,6 +128,76 @@ namespace BookHub.Areas.Admin.Controllers
 			TempData["Success"] = "Order Cancelled Successfully";
 
 			return RedirectToAction(nameof(Details), new { orderId = OrderVM.OrderHeader.Id });
+		}
+
+		[ActionName("Details")]
+		[HttpPost]
+		[Authorize(Roles = SD.Role_Admin + "," + SD.Role_Employee)]
+		public IActionResult Details_PayNow()
+		{
+			OrderVM.OrderHeader = _unitOfWork.OrderHeader
+				.Get(u => u.Id == OrderVM.OrderHeader.Id, includeProperties: "ApplicationUser");
+			OrderVM.OrderDetail = _unitOfWork.OrderDetail
+				.GetAll(u => u.OrderHeaderId == OrderVM.OrderHeader.Id, includeProperties: "Product");
+
+			// Stripe Logic
+			var domain = "https://localhost:7236/";
+
+			var options = new Stripe.Checkout.SessionCreateOptions
+			{
+				SuccessUrl = domain + $"admin/order/PaymentConfirmation?orderHeaderId={OrderVM.OrderHeader.Id}",
+				CancelUrl = domain + "admin/order/details?orderId={orderVM.OrderHeader.Id}",
+				LineItems = new List<SessionLineItemOptions>(),
+
+				Mode = "payment",
+			};
+
+			foreach (var item in OrderVM.OrderDetail)
+			{
+				var sessionLineItem = new SessionLineItemOptions
+				{
+					PriceData = new SessionLineItemPriceDataOptions
+					{
+						UnitAmount = (long)(item.Price * 100),
+						Currency = "usd",
+						ProductData = new SessionLineItemPriceDataProductDataOptions
+						{
+							Name = item.Product.Title
+						}
+					},
+					Quantity = item.Count
+				};
+				options.LineItems.Add(sessionLineItem);
+			}
+			var service = new Stripe.Checkout.SessionService();
+			Session session = service.Create(options);
+
+			_unitOfWork.OrderHeader.UpdateStripePaymentID(OrderVM.OrderHeader.Id, session.Id, session.PaymentIntentId);
+
+			_unitOfWork.Save();
+			Response.Headers.Add("Location", session.Url);
+			return new StatusCodeResult(303);
+		}
+
+		public IActionResult PaymentConfirmation(int orderHeaderId)
+		{
+
+			OrderHeader orderHeader = _unitOfWork.OrderHeader.Get(u => u.Id == orderHeaderId);
+			if (orderHeader.PaymentStatus == SD.PaymentStatusDelayedPayment)
+			{
+				var service = new SessionService();
+				Session session = service.Get(orderHeader.SessionId);
+
+				if (session.PaymentStatus.ToLower() == "paid")
+				{
+					_unitOfWork.OrderHeader.UpdateStripePaymentID(orderHeaderId, session.Id, session.PaymentIntentId);
+					_unitOfWork.OrderHeader.UpdateStatus(orderHeaderId, orderHeader.OrderStatus, SD.PaymentStatusApproved);
+					_unitOfWork.Save();
+				}
+				HttpContext.Session.Clear();
+			}
+
+			return View(orderHeaderId);
 		}
 
 		#region API CALLS
