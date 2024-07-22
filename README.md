@@ -10,10 +10,8 @@ The Book E-commerce Management System is a comprehensive web application that in
 - **Product Management (Books, Authors, Categories)**
 - **Shopping Cart and Checkout Functionality**
 - **Order Processing and Tracking**
-- **Email Notifications for Orders**
 - **Responsive Design with Bootstrap v5**
-- **Search and Filter Options**
-- **Review and Rating System**
+- **Filter Options**
 
 ## Features
 
@@ -29,15 +27,12 @@ The Book E-commerce Management System is a comprehensive web application that in
 - Implement checkout process and order tracking.
 - Integrate Stripe payment gateway for seamless transactions.
 
-### Notifications
-- Setup email notifications for order confirmations and updates.
-
 ### User Interface
 - Design a responsive and user-friendly interface using Bootstrap v5.
 - Implement custom tag helpers and view components for better UI management.
 
-### Search and Filter
-- Provide search and filter functionalities to easily find books.
+### Filter
+- Filter functionalities to easily find orders.
 
 ### Reviews and Ratings
 - Allow users to leave reviews and ratings for books.
