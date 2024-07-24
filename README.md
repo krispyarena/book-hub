@@ -83,6 +83,10 @@ The Book E-commerce Management System is a comprehensive web application that in
 
 If you would like to contribute to this project, please fork the repository and create a pull request. We welcome all contributions that improve the project.
 
+## Extra Resources
+
+- **Link to Presentation** : [Project Presentation](https://docs.google.com/presentation/d/1In2ANDOU2W5o7ElWG1f_DY37xjNNG4iU/edit?usp=sharing&ouid=112179910766979724441&rtpof=true&sd=true)
+
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
