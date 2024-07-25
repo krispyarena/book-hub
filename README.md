@@ -86,6 +86,7 @@ If you would like to contribute to this project, please fork the repository and 
 ## Extra Resources
 
 - **Link to Presentation** : [Project Presentation](https://docs.google.com/presentation/d/1In2ANDOU2W5o7ElWG1f_DY37xjNNG4iU/edit?usp=sharing&ouid=112179910766979724441&rtpof=true&sd=true)
+- **Link to Report** : [Project Report](https://drive.google.com/file/d/1kWqqwgDkkwyKyNgX4NhkyF5lpr-WuHxv/view?usp=sharing)
 
 ## License
 
