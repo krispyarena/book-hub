@@ -32,10 +32,8 @@ The Book E-commerce Management System is a comprehensive web application that in
 - Implement custom tag helpers and view components for better UI management.
 
 ### Filter
-- Filter functionalities to easily find orders.
+- Filter functionalities for order management.
 
-### Reviews and Ratings
-- Allow users to leave reviews and ratings for books.
 
 ## Getting Started
 
@@ -94,4 +92,4 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 ## Contact
 
-For any inquiries or feedback, please contact at krispyarena@gmail.com or create an issue on this repository.
+For any inquiries or feedback, please contact at krispy.arena@gmail.com or create an issue on this repository.
